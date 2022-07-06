@@ -6,7 +6,7 @@ import com.zpxu.TreeNode;
 /**
  * @author: zpxu
  * @date: 2022/6/7
- * @description:
+ * @description:判断一棵树是否为堆成的二叉树
  */
 public class Solution0101 {
     public boolean isSymmetric(TreeNode root) {
