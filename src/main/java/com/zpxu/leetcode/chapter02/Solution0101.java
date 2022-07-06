@@ -1,5 +1,6 @@
 package com.zpxu.leetcode.chapter02;
 
+
 import com.zpxu.TreeNode;
 
 /**
@@ -12,14 +13,20 @@ public class Solution0101 {
         return isSymmetric(root, root);
     }
 
-    public boolean isSymmetric(TreeNode root1, TreeNode root2) {
-        if (root1 == null && root2 == null) {
+    public boolean isSymmetric(TreeNode node1, TreeNode node2) {
+        //两颗树都是空树，则肯定是对称的
+        if (node1 == null && node2 == null) {
             return true;
-        } else if (root1 == null || root2 == null) {
+        }
+        //只要右一个为空则，肯定不对称
+        if (node1 == null || node2 == null) {
             return false;
         }
-        return root1.val == root2.val
-                && isSymmetric(root1.left, root2.right)
-                && isSymmetric(root1.right, root2.left);
+        //若想对称，不仅值要相等左右子树也得是对称树
+        return node1.val == node2.val
+                && isSymmetric(node1.left, node2.right)
+                && isSymmetric(node1.right, node2.left);
     }
+
+
 }
