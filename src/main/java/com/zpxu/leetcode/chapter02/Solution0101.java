@@ -4,28 +4,28 @@ package com.zpxu.leetcode.chapter02;
 import com.zpxu.TreeNode;
 
 /**
+ * 给你一个二叉树的根节点 root ， 检查它是否轴对称。
+ * 主要思路是需要写出递归函数，这个递归函数的含义是如何判断两棵树是对称的
+ * 1、根结点值相等
+ * 2、每个树的左子树都与另一棵树的右子树镜像对称
+ *
  * @author: zpxu
  * @date: 2022/6/7
  * @description:判断一棵树是否为堆成的二叉树
  */
 public class Solution0101 {
     public boolean isSymmetric(TreeNode root) {
-        return isSymmetric(root, root);
+        return inner(root, root);
     }
 
-    public boolean isSymmetric(TreeNode node1, TreeNode node2) {
-        //两颗树都是空树，则肯定是对称的
+    public boolean inner(TreeNode node1, TreeNode node2) {
         if (node1 == null && node2 == null) {
             return true;
         }
-        //只要右一个为空则，肯定不对称
         if (node1 == null || node2 == null) {
             return false;
         }
-        //若想对称，不仅值要相等左右子树也得是对称树
-        return node1.val == node2.val
-                && isSymmetric(node1.left, node2.right)
-                && isSymmetric(node1.right, node2.left);
+        return node1.val == node2.val && inner(node1.left, node2.right) && inner(node1.right, node2.left);
     }
 
 

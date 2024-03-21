@@ -3,6 +3,10 @@ package com.zpxu.leetcode.chapter03;
 import com.zpxu.ListNode;
 
 /**
+ * leetcode 160
+ * 给你两个单链表的头节点 headA 和 headB ，请你找出并返回两个单链表相交的起始节点。如果两个链表不存在相交节点，返回 null 。
+ * 解题思路：两个链表加起来的长度是一样的，所以把两个链表串起来是个很巧妙的技巧
+ *
  * @author: zpxu
  * @date: 2022/6/20
  * @description:
@@ -12,37 +16,13 @@ public class Solution0160 {
         if (headA == null || headB == null) {
             return null;
         }
-        int lengthA = 0;
-        int lengthB = 0;
-        ListNode cur = headA;
-        while (cur != null) {
-            lengthA++;
-            cur = cur.next;
+        ListNode newAHead = headA;
+        ListNode newBHead = headB;
+        while (newAHead != newBHead) {
+            // 需要注意这里的细节，否则很容易出错
+            newAHead = newAHead == null ? headA : newAHead.next;
+            newBHead = newBHead == null ? headB : newBHead.next;
         }
-
-        cur = headB;
-        while (cur != null) {
-            lengthB++;
-            cur = cur.next;
-        }
-
-        //head1表示比较长的链表
-        ListNode head1 = lengthA > lengthB ? headA : headB;
-        ListNode head2 = head1 == headA ? headB : headA;
-
-        int k = Math.abs(lengthA - lengthB);
-        while (k != 0) {
-            head1 = head1.next;
-            k--;
-        }
-        while (head1 != null) {
-            if (head1 == head2) {
-                return head1;
-            }
-            head1 = head1.next;
-            head2 = head2.next;
-        }
-
-        return null;
+        return newAHead;
     }
 }
